@@ -1,0 +1,8 @@
+client:
+  client_id : 'mB697sHmcrM0Z7QmBsnQC0D3m'
+  client_secret : 'QNkLvTwl1YVmHViF9DhOkFx8h5s9QqvpcRB9AQUxKAa5yhsbku'
+  oauth_token : '400834916-VLCIoKGKRNdMh4GW8d7csJWqAHYrL81go205Pvru'
+  oauth_token_secret : 'XCEWKgO9FsHxqGiKGBjANqg1MU9tHOvJjNWENjPgejDll'
+  base_url : "https://api.twitter.com/"
+  base_url_v : "https://api.twitter.com/1.1/"
+  woeid : '1'
