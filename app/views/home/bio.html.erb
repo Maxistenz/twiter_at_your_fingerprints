@@ -1,0 +1,22 @@
+<div class="container">
+
+  <h1>Biography for: <%= params[:tweet_owner] %></h1>
+
+  <table class="table table-condensed">
+
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+
+    <tr>
+      <td><%= @user.name.presence || 'No name.' %></td>
+      <td><%= @user.description.presence || 'No Description.' %></td>
+    <tr>
+
+      <td><%= link_to 'back', tweets_path(trend_name: params[:trend_name]) %></td>
+      <td><%= link_to 'home', home_path %></td>
+
+  </table>
+
+</div>

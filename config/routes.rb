@@ -1,5 +1,19 @@
 TwitterApp::Application.routes.draw do
 
+  # get "home#home"
+  root :to => "home#index"
+
+  get 'bio' => 'home#bio'
+  get 'tweets' => 'home#tweets'
+  get 'home' => 'home#index'
+
+  # resources :home do
+  #   collection do
+  #     get 'tweets'
+  #   end
+  # end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

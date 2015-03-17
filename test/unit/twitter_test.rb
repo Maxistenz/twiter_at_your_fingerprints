@@ -11,9 +11,9 @@ class TwitterTest < Test::Unit::TestCase
   context 'reading trending' do
 
     setup do
-      FakeWeb.
-          register_uri(:get, 'https://api.twitter.com/1.1/trends/place.json?id=1',
-                       [{body: open('test/fixtures/trend_body.txt', status: ['200', 'OK'])}])
+        FakeWeb.
+            register_uri(:get, 'https://api.twitter.com/1.1/trends/place.json?id=1',
+                         [{body: open('test/fixtures/trend_body.txt', status: ['200', 'OK'])}])
 
     end
 
@@ -32,9 +32,11 @@ class TwitterTest < Test::Unit::TestCase
   context 'reading tweets' do
 
     setup do
+      url = "https://api.twitter.com/1.1/search/tweets.json?q=#sport&count=10"
       FakeWeb.
-          register_uri(:get, 'https://api.twitter.com/1.1/search/tweets.json?q=%23sport&count=10',
-                   [{body: open('test/fixtures/tweets_body.txt', status: ['200', 'OK'])}])
+          register_uri(:get, URI.encode(url),
+                   [{:body => open('test/fixtures/tweets_body.txt', :status => ["200", "OK"])}])
+      @twitter = Twitter.new
     end
 
     should 'return 10 tweets' do
@@ -54,15 +56,17 @@ class TwitterTest < Test::Unit::TestCase
   context 'reading user bio' do
 
     setup do
+      url = "https://api.twitter.com/1.1/users/show.json?screen_name=puntotweet"
       FakeWeb.
-          register_uri(:get, 'https://api.twitter.com/1.1/users/show.json?screen_name=puntotweet',
-                     [{body: open('test/fixtures/bio_body.txt', status: ['200', 'OK'])}])
+          register_uri(:get, URI.encode(url),
+                     [{:body => open('test/fixtures/bio_body.txt', :status => ["200", "OK"])}])
+            @twitter = Twitter.new
     end
 
     should 'return name and description of the user' do
       result = @twitter.bio('puntotweet')
-      assert_equal 'Punto Informatico', result.name
-      assert_equal 'Il primo quotidiano italiano online di inform...', result.description
+      assert_equal('Punto Informatico', result.name)
+      assert_equal('Il primo quotidiano italiano online di inform...', result.description)
     end
 
   end

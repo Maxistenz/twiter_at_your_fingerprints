@@ -2,7 +2,7 @@ require 'oauth'
 require 'rubygems'
 require 'trend'
 require 'tweet'
-require 'yaml'
+require 'uri'
 
 class Twitter
 
@@ -15,7 +15,8 @@ class Twitter
   # @return [Array] with the information of the trending topics
   def trending_topics
     response = access_token.
-       request(:get, @configuration['base_url_v'] + 'trends/place.json?id=' + @configuration['woeid'])
+       request(:get,
+               @configuration['base_url_v'] + 'trends/place.json?id=' + @configuration['woeid'])
     response_json = JSON.parse(response.body)
     response_json[0]['trends'].map do |trend|
       Trend.new(trend['name'], trend['url'])
@@ -29,9 +30,9 @@ class Twitter
   #
   # @return [Array] with the information of the tweets
   def tweets(hashtag, n)
-    tag_ok =  hashtag.gsub('#', '%23')
     response = access_token.
-        request(:get, @configuration['base_url_v'] + "search/tweets.json?q=#{tag_ok}&count=#{n}")
+       request(:get, URI.encode(@configuration['base_url_v'] +
+                                "search/tweets.json?q=#{hashtag}&count=#{n}"))
     response_json = JSON.parse(response.body)
     response_json['statuses'].map do |status|
       Tweet.new(status['user']['name'], status['created_at'],
@@ -45,9 +46,9 @@ class Twitter
   #
   # @return [Hash] with the relevant information of the user
   def bio(name)
-    name = name.gsub('@','')
     response = access_token.
-        request(:get, @configuration['base_url_v'] + "users/show.json?screen_name=#{name}")
+        request(:get,
+                URI.encode(@configuration['base_url_v'] + "users/show.json?screen_name=#{name}"))
     response_json = JSON.parse(response.body)
     TwitterUser.new(response_json['name'], response_json['description'])
   end
