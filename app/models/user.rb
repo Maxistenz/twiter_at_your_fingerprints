@@ -27,9 +27,10 @@ class User < ActiveRecord::Base
         trend = Trend.new(name: name, url: url)
       end
       self.trends << trend
-      return trend
+      trend
+    else
+      nil
     end
-      return nil
   end
 
 end
