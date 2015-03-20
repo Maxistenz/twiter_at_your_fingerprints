@@ -11,10 +11,29 @@
     </tr>
 
     <% @list_trending.each do |trend| %>
+     <tr>
+       <td><%= trend.name %></td>
+       <td><%= trend.url %></td>
+       <td><%= link_to 'Tweets for trending topics', tweets_path(trend_name: trend.name) %></td>
+       <td class="trendLine" data-name="<%= trend.name %>" data-url="<%= trend.url %>">Add Favorites</td>
+     </tr>
+    <% end %>
+  </table>
+
+  <h1>Favorites Trendings topics</h1>
+
+  <table class="table table-condensed" id="favorites_table">
+    <tr>
+      <th>Name</th>
+      <th>URL</th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% current_user.trends.each do |trend| %>
         <tr>
           <td><%= trend.name %></td>
           <td><%= trend.url %></td>
-          <td><%= link_to 'Tweets for trending topics', tweets_path(trend_name: trend.name) %></td>
         </tr>
     <% end %>
 

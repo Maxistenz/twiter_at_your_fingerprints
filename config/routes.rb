@@ -1,11 +1,14 @@
 TwitterApp::Application.routes.draw do
 
+  devise_for :users
+
   # get "home#home"
   root :to => "home#index"
 
   get 'bio' => 'home#bio'
   get 'tweets' => 'home#tweets'
   get 'home' => 'home#index'
+  post 'trend' => 'trend#create'
 
   # resources :home do
   #   collection do

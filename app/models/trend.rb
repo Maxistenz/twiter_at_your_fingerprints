@@ -1,10 +1,7 @@
-class Trend
+class Trend < ActiveRecord::Base
 
-  attr_accessor :name, :url
+  attr_accessible :name, :url
 
-  def initialize(name, url)
-    @name = name
-    @url = url
-  end
+  has_and_belongs_to_many :users
 
 end

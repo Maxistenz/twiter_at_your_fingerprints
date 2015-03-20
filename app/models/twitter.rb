@@ -19,7 +19,7 @@ class Twitter
                @configuration['base_url_v'] + 'trends/place.json?id=' + @configuration['woeid'])
     response_json = JSON.parse(response.body)
     response_json[0]['trends'].map do |trend|
-      Trend.new(trend['name'], trend['url'])
+      Trend.new(trend.slice('name', 'url'))
     end
   end
 

@@ -8,6 +8,11 @@ class HomeControllerTest < ActionController::TestCase
           register_uri(:get, "https://api.twitter.com/1.1/trends/place.json?id=1",
                        [{:body => open('test/fixtures/trend_body.txt',
                                        :status => ["200", "OK"])}])
+      user = User.new({email:'test@test.com', password: 'f4k3p455w0rd' })
+      user.save
+
+      sign_in user
+      @request.env['devise.mapping'] = Devise.mappings[:user]
 
       get :index
       @list_of_trending = assigns(:list_trending)
@@ -30,12 +35,15 @@ class HomeControllerTest < ActionController::TestCase
   end
 
   context 'list of tweets' do
-
     setup do
       url = "https://api.twitter.com/1.1/search/tweets.json?q=#sport&count=10"
       FakeWeb.
           register_uri(:get, URI.encode(url),
                        [{:body => open('test/fixtures/tweets_body.txt', :status => ["200", "OK"])}])
+      user = User.new({email:'test@test.com', password: 'f4k3p455w0rd' })
+      user.save
+      sign_in user
+      @request.env['devise.mapping'] = Devise.mappings[:user]
 
       get(:tweets, trend_name: '#sport')
       @list_of_tweets = assigns(:list_tweets)
@@ -54,16 +62,20 @@ class HomeControllerTest < ActionController::TestCase
       assert_equal 10, @list_of_tweets.size
       assert_equal 'Mencap MeTime South' , @list_of_tweets[9].name
     end
-
   end
 
   context 'reading twitter user bio' do
-
     setup do
       url = "https://api.twitter.com/1.1/users/show.json?screen_name=puntotweet"
       FakeWeb.
           register_uri(:get, URI.encode(url),
                        [{:body => open('test/fixtures/bio_body.txt', :status => ["200", "OK"])}])
+
+      user = User.new({email:'test@test.com', password: 'f4k3p455w0rd' })
+      user.save
+
+      sign_in user
+      @request.env['devise.mapping'] = Devise.mappings[:user2]
 
       get(:bio, {tweet_owner: 'puntotweet', trend_name: '#sport'})
       @user = assigns(:user)
@@ -81,7 +93,6 @@ class HomeControllerTest < ActionController::TestCase
     should 'get a bio from puntotweet' do
       assert_equal 'Punto Informatico', @user.name
     end
-
   end
 
 end
