@@ -8,6 +8,14 @@ gem 'oauth'
 
 gem 'devise'
 
+gem 'rails_layout'
+
+gem 'jquery-rails'
+
+gem 'bootstrap-sass', '3.2.0.2'
+
+gem 'autoprefixer-rails'
+
 group :test do
   gem 'fakeweb'
   gem 'test-unit'
@@ -20,7 +28,3 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'rails_layout'
-
-
-gem 'jquery-rails'

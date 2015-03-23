@@ -12,7 +12,7 @@ class HomeControllerTest < ActionController::TestCase
       user.save
 
       sign_in user
-      @request.env['devise.mapping'] = Devise.mappings[:user]
+      @request.env['devise.mapping'] = Devise.mappings[:devise]
 
       get :index
       @list_of_trending = assigns(:list_trending)
@@ -43,7 +43,7 @@ class HomeControllerTest < ActionController::TestCase
       user = User.new({email:'test@test.com', password: 'f4k3p455w0rd' })
       user.save
       sign_in user
-      @request.env['devise.mapping'] = Devise.mappings[:user]
+      @request.env['devise.mapping'] = Devise.mappings[:devise]
 
       get(:tweets, trend_name: '#sport')
       @list_of_tweets = assigns(:list_tweets)
@@ -75,7 +75,7 @@ class HomeControllerTest < ActionController::TestCase
       user.save
 
       sign_in user
-      @request.env['devise.mapping'] = Devise.mappings[:user2]
+      @request.env['devise.mapping'] = Devise.mappings[:user]
 
       get(:bio, {tweet_owner: 'puntotweet', trend_name: '#sport'})
       @user = assigns(:user)
