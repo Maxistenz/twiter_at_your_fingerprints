@@ -17,6 +17,7 @@ gem 'bootstrap-sass', '3.2.0.2'
 gem 'autoprefixer-rails'
 
 group :test do
+  gem 'factory_girl_rails'
   gem 'fakeweb'
   gem 'test-unit'
   gem 'shoulda'

@@ -1,0 +1,25 @@
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <table class="table table-condensed">
+    <tr>
+      <th>Email</th>
+      <th>Rol</th>
+      <th></th>
+    </tr>
+
+    <tr>
+      <td><%= @user.email %></td>
+        <% if @user.admin %>
+          <td>Admin</td>
+        <% else %>
+          <td>User</td>
+        <% end %>
+      <td><%= link_to 'Edit User', edit_user_path(@user), class: 'btn-link' %></td>
+    </tr>
+
+  </table>
+
+  <%= link_to 'Back', users_path %>
+</div>

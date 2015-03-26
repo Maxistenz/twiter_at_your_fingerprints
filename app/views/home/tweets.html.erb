@@ -13,14 +13,14 @@
     </tr>
 
     <% @list_tweets.each do |tweet| %>
-        <tr>
-          <td><%= tweet.name %></td>
-          <td><%= tweet.created_at %></td>
-          <td><%= tweet.text %></td>
-          <td><%= link_to 'View user biography',
-                          bio_path(tweet_owner: tweet.name, trend_name: params[:trend_name]) ,
-                          class: 'btn-link' %></td>
-        </tr>
+      <tr>
+        <td><%= tweet.name %></td>
+        <td><%= tweet.created_at %></td>
+        <td><%= tweet.text %></td>
+        <td><%= link_to 'View user biography',
+                        bio_path(tweet_owner: tweet.name, trend_name: params[:trend_name]) ,
+                        class: 'btn-link' %></td>
+      </tr>
 
     <% end %>
 

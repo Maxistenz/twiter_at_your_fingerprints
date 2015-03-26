@@ -1,4 +1,4 @@
-class TrendController < ApplicationController
+class TrendsController < ApplicationController
 
   def create
     trend = current_user.add_trend(params[:name], params[:url])

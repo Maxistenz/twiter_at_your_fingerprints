@@ -13,12 +13,13 @@
     </tr>
 
     <% @list_trending.each do |trend| %>
-     <tr>
-       <td><%= trend.name %></td>
-       <td><%= trend.url %></td>
-       <td><%= link_to 'Tweets for trending topics', tweets_path(trend_name: trend.name) %></td>
-       <td class="trendLine" data-name="<%= trend.name %>" data-url="<%= trend.url %>">Add Favorites</td>
-     </tr>
+      <tr>
+        <td><%= trend.name %></td>
+        <td><%= trend.url %></td>
+        <td><%= link_to 'Tweets for trending topics', tweets_path(trend_name: trend.name) %></td>
+        <td class="trendLine" data-name="<%= trend.name %>"
+            data-url="<%= trend.url %>">Add Favorites</td>
+      </tr>
     <% end %>
   </table>
 
@@ -33,10 +34,10 @@
     </tr>
 
     <% current_user.trends.each do |trend| %>
-        <tr>
-          <td><%= trend.name %></td>
-          <td><%= trend.url %></td>
-        </tr>
+      <tr>
+        <td><%= trend.name %></td>
+        <td><%= trend.url %></td>
+      </tr>
     <% end %>
 
   </table>

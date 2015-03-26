@@ -8,11 +8,9 @@ class HomeControllerTest < ActionController::TestCase
           register_uri(:get, "https://api.twitter.com/1.1/trends/place.json?id=1",
                        [{:body => open('test/fixtures/trend_body.txt',
                                        :status => ["200", "OK"])}])
-      user = User.new({email:'test@test.com', password: 'f4k3p455w0rd' })
-      user.save
-
+      user = FactoryGirl.create(:common)
       sign_in user
-      @request.env['devise.mapping'] = Devise.mappings[:devise]
+      @request.env['devise.mapping'] = Devise.mappings[:user]
 
       get :index
       @list_of_trending = assigns(:list_trending)
@@ -40,10 +38,9 @@ class HomeControllerTest < ActionController::TestCase
       FakeWeb.
           register_uri(:get, URI.encode(url),
                        [{:body => open('test/fixtures/tweets_body.txt', :status => ["200", "OK"])}])
-      user = User.new({email:'test@test.com', password: 'f4k3p455w0rd' })
-      user.save
+      user = FactoryGirl.create(:common)
       sign_in user
-      @request.env['devise.mapping'] = Devise.mappings[:devise]
+      @request.env['devise.mapping'] = Devise.mappings[:user]
 
       get(:tweets, trend_name: '#sport')
       @list_of_tweets = assigns(:list_tweets)
@@ -71,9 +68,7 @@ class HomeControllerTest < ActionController::TestCase
           register_uri(:get, URI.encode(url),
                        [{:body => open('test/fixtures/bio_body.txt', :status => ["200", "OK"])}])
 
-      user = User.new({email:'test@test.com', password: 'f4k3p455w0rd' })
-      user.save
-
+      user = FactoryGirl.create(:common)
       sign_in user
       @request.env['devise.mapping'] = Devise.mappings[:user]
 
